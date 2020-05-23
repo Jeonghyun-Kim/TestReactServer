@@ -16,15 +16,16 @@ import Home from './screens/Home';
 import Menu1 from './screens/Menu1';
 import Menu2 from './screens/Menu2';
 import Menu3 from './screens/Menu3';
-import Login from './screens/Login';
+import Signin from './screens/Singin';
+import Join from './screens/Join';
 
 // IMPORTING COMPONENTS
-import Logout from './components/Logout';
+import Signout from './components/Signout';
 import MainHeader from './components/MainHeader';
 
 const AppRouter = () => {
   const [accessToken, setAccessToken] = useState(null);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isSignedIn, setSignedIn] = useState(false);
 
   return (
     <Router>
@@ -32,11 +33,11 @@ const AppRouter = () => {
         value={{
           accessToken,
           setAccessToken,
-          setLoggedIn,
+          setSignedIn,
         }}
       >
-        <MainHeader isLoggedIn={isLoggedIn}/>
-        <h1>{isLoggedIn ? `로그인됨` : `로그인 안됨`}</h1>
+        <MainHeader isSignedIn={isSignedIn}/>
+        <h1>{isSignedIn ? `로그인됨` : `로그인 안됨`}</h1>
         <Switch>
           <Route exact path='/'>
             <Home />
@@ -50,16 +51,19 @@ const AppRouter = () => {
           <Route path='/menu3'>
             <Menu3 />
           </Route>
-          <Route path='/login'>
-            {isLoggedIn
+          <Route path='/signin'>
+            {isSignedIn
             ? (
               <Redirect to='/' />
             ) :(
-              <Login />
+              <Signin />
             )}
           </Route>
-          <Route path='/logout'>
-            <Logout />
+          <Route path='/signout'>
+            <Signout />
+          </Route>
+          <Route path='/join'>
+            <Join />
           </Route>
         </Switch>
       </AuthContext.Provider>

@@ -4,11 +4,11 @@ import { Redirect } from 'react-router-dom';
 import AuthContext from '../AuthContext';
 
 export default () => {
-  const { setAccessToken, setLoggedIn } = useContext(AuthContext);
+  const { setAccessToken, setSignedIn } = useContext(AuthContext);
 
   useEffect(() => {
     setAccessToken(null);
-    setLoggedIn(false);
+    setSignedIn(false);
   })
 
   return (
