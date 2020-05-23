@@ -23,17 +23,22 @@ import Join from './screens/Join';
 import Signout from './components/Signout';
 import MainHeader from './components/MainHeader';
 
+// IMPORTING UTILS
+import { getToken } from './js/auth_utils';
+
 const AppRouter = () => {
   const [accessToken, setAccessToken] = useState(null);
   const [isSignedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
-    let token = sessionStorage.getItem('@access_token');
-    console.log(`AppTouter useEffect Called! Restored Token: ${token}`);
-    if (token) {
-      setAccessToken(token);
-      setSignedIn(true);
-    }
+    const restoreToken = async () => {
+      const tokenJson = await getToken();
+      if (tokenJson) {
+        setAccessToken(tokenJson.token);
+        setSignedIn(true);
+      }
+    };
+    restoreToken();
   }, []);
 
   return (

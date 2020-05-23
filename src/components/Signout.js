@@ -3,11 +3,13 @@ import { Redirect } from 'react-router-dom';
 
 import AuthContext from '../AuthContext';
 
+import { signOut } from '../js/auth_utils';
+
 export default () => {
   const { setAccessToken, setSignedIn } = useContext(AuthContext);
 
   useEffect(() => {
-    sessionStorage.removeItem('@access_token');
+    signOut();
     setAccessToken(null);
     setSignedIn(false);
   })

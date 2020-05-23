@@ -8,18 +8,42 @@ import AuthContext from '../AuthContext';
 
 // IMPORTING COMPONENTS
 
+// IMPORTING UTILS
+import { signIn } from '../js/auth_utils';
+
+// IMPORTING DEFINES
+import { ERROR_CODE } from '../js/defines';
+
+// TODO: INPUT VALIDATION
 export default () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [error, setError] = useState(null);
 
 	const { setSignedIn, setAccessToken } = useContext(AuthContext);
 	const history = useHistory();
 
 	const handleSingin = async () => {
-		let accessToken = 'Token!';
-		sessionStorage.setItem('@access_token', accessToken)
-		setAccessToken(accessToken);
-		setSignedIn(true);
+		try {
+			const res = await signIn(username, password);
+			switch (res.error) {
+				case ERROR_CODE.NO_SUCH_USER:
+					setError('Check your username!');
+					break;
+				case ERROR_CODE.PASSWORD_WRONG:
+					setError('Check your password!')
+					break;
+				case ERROR_CODE.OK:
+					setAccessToken(res.token);
+					setSignedIn(true);
+					break;
+				default:
+					setError('Server maintenance or Something. Sorry...');
+					break;
+			}
+		} catch (error) {
+			setError('Server maintenance or Something. Sorry...');
+		}
 	}
 
 	return (
@@ -46,6 +70,7 @@ export default () => {
 			</form>
 			<Button variant='contained' color='primary' onClick={() => handleSingin()}>Sign In!</Button>
 			<Button variant='contained' color='primary' onClick={() => history.push('/join')}>JOIN!</Button>
+			<h3>{error}</h3>
 		</>
 	)
 }
