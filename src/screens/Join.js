@@ -14,11 +14,14 @@ export default () => {
 	const [password, setPassword] = useState('');
 	const [gender, setGender] = useState(null);
 
-	const { setSignedIn } = useContext(AuthContext);
+	const { setSignedIn, setAccessToken } = useContext(AuthContext);
 	const history = useHistory();
 
 	const handleJoin = async () => {
-		await setSignedIn(true);
+		let accessToken = 'Token!';
+		sessionStorage.setItem('@access_token', accessToken)
+		setAccessToken(accessToken);
+		setSignedIn(true);
 		history.push('/');
 	}
 

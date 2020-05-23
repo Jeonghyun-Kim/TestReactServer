@@ -12,11 +12,14 @@ export default () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
-	const { setSignedIn } = useContext(AuthContext);
+	const { setSignedIn, setAccessToken } = useContext(AuthContext);
 	const history = useHistory();
 
 	const handleSingin = async () => {
-		await setSignedIn(true);
+		let accessToken = 'Token!';
+		sessionStorage.setItem('@access_token', accessToken)
+		setAccessToken(accessToken);
+		setSignedIn(true);
 	}
 
 	return (

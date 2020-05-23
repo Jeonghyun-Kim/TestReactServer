@@ -1,5 +1,5 @@
 // IMPORTING LIBRARIES
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import logo from './logo.svg';
 import {
   BrowserRouter as Router,
@@ -26,6 +26,15 @@ import MainHeader from './components/MainHeader';
 const AppRouter = () => {
   const [accessToken, setAccessToken] = useState(null);
   const [isSignedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    let token = sessionStorage.getItem('@access_token');
+    console.log(`AppTouter useEffect Called! Restored Token: ${token}`);
+    if (token) {
+      setAccessToken(token);
+      setSignedIn(true);
+    }
+  }, []);
 
   return (
     <Router>

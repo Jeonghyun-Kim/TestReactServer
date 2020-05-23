@@ -7,6 +7,7 @@ export default () => {
   const { setAccessToken, setSignedIn } = useContext(AuthContext);
 
   useEffect(() => {
+    sessionStorage.removeItem('@access_token');
     setAccessToken(null);
     setSignedIn(false);
   })
