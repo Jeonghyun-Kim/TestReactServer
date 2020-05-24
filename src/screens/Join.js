@@ -51,10 +51,15 @@ export default () => {
 		}
 	}
 
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		handleJoin();
+	}
+
 	return (
 		<>
 			<h2>Join Us Today!</h2>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<TextField
 					label='username'
 					variant='outlined'
@@ -92,8 +97,8 @@ export default () => {
 					<FormControlLabel value='Female' control={<Radio />} label="Female" />
 					<FormControlLabel value='Male' control={<Radio />} label="Male" />
 				</RadioGroup>
+				<Button variant='contained' color='primary' onClick={() => handleJoin()}>Submit</Button>
 			</form>
-			<Button variant='contained' color='primary' onClick={() => handleJoin()}>Submit</Button>
 			<h3>{error}</h3>
 		</>
 	)

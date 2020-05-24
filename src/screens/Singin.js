@@ -46,10 +46,15 @@ export default () => {
 		}
 	}
 
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		handleSingin();
+	}
+
 	return (
 		<>
 			<h2>Sign In Page!</h2>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<TextField
 					label='username'
 					variant='outlined'
@@ -67,9 +72,9 @@ export default () => {
 					margin='normal'
 					onChange={(event) => setPassword(event.target.value)}
 				/>
+				<Button variant='contained' color='primary' type='submit' onClick={() => handleSingin()}>Sign In!</Button>
+				<Button variant='contained' color='primary' onClick={() => history.push('/join')}>JOIN!</Button>
 			</form>
-			<Button variant='contained' color='primary' onClick={() => handleSingin()}>Sign In!</Button>
-			<Button variant='contained' color='primary' onClick={() => history.push('/join')}>JOIN!</Button>
 			<h3>{error}</h3>
 		</>
 	)

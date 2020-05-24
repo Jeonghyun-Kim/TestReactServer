@@ -52,11 +52,10 @@ const signUp = async (username = '', name = '', email = '', password = '', gende
 const getToken = async (token) => {
   const access_token = token ? token : sessionStorage.getItem(KEY.ACCESS_TOKEN);
   const refresh_token = sessionStorage.getItem(KEY.REFRESH_TOKEN);
-  console.log(`TOKEN RESTORED ACCESS: ${access_token}`);
-  console.log(`TOKEN RESTORED REFRESH: ${refresh_token}`);
+  // console.log(`TOKEN RESTORED ACCESS: ${access_token}`);
+  // console.log(`TOKEN RESTORED REFRESH: ${refresh_token}`);
   if (refresh_token) {
     try {
-      console.log(access_token)
       const response = await fetch(`${SERVER_URL}/auth/token`, {
         method: 'POST',
         headers: {
