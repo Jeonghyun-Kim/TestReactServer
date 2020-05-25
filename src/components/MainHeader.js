@@ -19,6 +19,7 @@ export default () => {
     <div className='nav-bar'>
       <Link to='/'> home </Link>
       <Link to='/mypage'> mypage </Link>
+      <Link to='/painting/upload'> upload </Link>
       {isSignedIn
       ? (
         <SignoutButton>로그아웃</SignoutButton>

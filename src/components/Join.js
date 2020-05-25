@@ -84,7 +84,7 @@ export default () => {
 					margin='normal'
 					onChange={(event) => setPassword(event.target.value)}
 				/>
-				<RadioGroup aria-label="gender" name="gender1" value={gender} onChange={(event) => setGender(event.target.value)}>
+				<RadioGroup aria-label="gender" name="gender" value={gender} onChange={(event) => setGender(event.target.value)}>
 					<FormControlLabel value='Female' control={<Radio />} label="Female" />
 					<FormControlLabel value='Male' control={<Radio />} label="Male" />
 				</RadioGroup>

@@ -15,6 +15,7 @@ import HomeScreen from './screens/HomeScreen';
 import MyPageScreen from './screens/MyPageScreen';
 import SigninScreen from './screens/SigninScreen';
 import JoinScreen from './screens/JoinScreen';
+import UploadScreen from './screens/UploadScreen';
 
 // IMPORTING COMPONENTS
 import MainHeader from './components/MainHeader';
@@ -45,6 +46,9 @@ const AppRouter = () => {
           </Route>
           <Route path='/mypage'>
             <MyPageScreen />
+          </Route>
+          <Route path='/painting/upload'>
+            <UploadScreen />
           </Route>
           <Route path='/signin'>
             <SigninScreen />
