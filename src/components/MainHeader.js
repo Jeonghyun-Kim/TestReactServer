@@ -1,16 +1,27 @@
-import React from 'react';
+// IMPORTING LIBRARIES
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-export default ({ isSignedIn }) => {
+// IMPORTING CONTEXTS
+import AuthContext from '../AuthContext';
+
+// IMPORTING COMPONENTS
+import SignoutButton from '../components/SignoutButton';
+
+// IMPORTING UTILS
+
+// IMPORTING DEFINES
+
+export default () => {
+  const { isSignedIn } = useContext(AuthContext);
+
   return (
     <div className='nav-bar'>
       <Link to='/'> home </Link>
-      <Link to='/menu1'> menu1 </Link>
-      <Link to='/menu2'> menu2 </Link>
-      <Link to='/menu3'> menu3 </Link>
+      <Link to='/mypage'> mypage </Link>
       {isSignedIn
       ? (
-        <Link to='/signout' > 로그아웃 </Link>
+        <SignoutButton>로그아웃</SignoutButton>
       ) : (
         <Link to='/signin'> 로그인 </Link>
       )}

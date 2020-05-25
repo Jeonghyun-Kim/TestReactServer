@@ -23,14 +23,13 @@ export default () => {
 	const [gender, setGender] = useState(null);
 	const [error, setError] = useState(null);
 
-	const { setSignedIn, setAccessToken } = useContext(AuthContext);
+	const { setSignedIn } = useContext(AuthContext);
 	const history = useHistory();
 
-	const handleJoin = async () => {
-		try {
-			const res = await signUp(username, name, email, password, gender);
-			console.log(res.error)
-			switch (res.error) {
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		signUp({ username, name, email, password, gender }, (error) => {
+			switch (error) {
 				case ERROR_CODE.USERNAME_ALREADY_OCCUPIED:
 					setError('Try another username!');
 					break;
@@ -38,22 +37,14 @@ export default () => {
 					setError('Your email already exists.')
 					break;
 				case ERROR_CODE.OK:
-					setAccessToken(res.token);
 					setSignedIn(true);
-					history.push('/');
+					history.goBack(2);
 					break;
 				default:
 					setError('Server maintenance or Something. Sorry...');
 					break;
 			}
-		} catch (error) {
-			setError('Server maintenance or Something. Sorry...');
-		}
-	}
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		handleJoin();
+		});
 	}
 
 	return (
@@ -97,7 +88,7 @@ export default () => {
 					<FormControlLabel value='Female' control={<Radio />} label="Female" />
 					<FormControlLabel value='Male' control={<Radio />} label="Male" />
 				</RadioGroup>
-				<Button variant='contained' color='primary' onClick={() => handleJoin()}>Submit</Button>
+				<Button variant='contained' color='primary' type='submit'>Submit</Button>
 			</form>
 			<h3>{error}</h3>
 		</>

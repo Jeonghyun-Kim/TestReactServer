@@ -1,6 +1,6 @@
 import { SERVER_URL, KEY } from './defines';
 
-const signIn = async (username = '', password = '') => {
+const signIn = async ({ username = '', password = '' }, cb = () => {}) => {
   try {
     const response = await fetch(`${SERVER_URL}/auth/login`, {
       method: 'POST',
@@ -13,10 +13,8 @@ const signIn = async (username = '', password = '') => {
     if (response.ok) {
       sessionStorage.setItem(KEY.ACCESS_TOKEN, resJson.token);
       sessionStorage.setItem(KEY.REFRESH_TOKEN, resJson.refresh_token);
-      return { token: resJson.token, error: resJson.error };
-    } else {
-      return { error: resJson.error };
-    };
+    }
+    cb(resJson.error);
   } catch (error) {
     throw new Error(`ERROR: ${error}`);
   }
@@ -27,7 +25,7 @@ const signOut = () => {
   sessionStorage.removeItem(KEY.REFRESH_TOKEN);
 }
 
-const signUp = async (username = '', name = '', email = '', password = '', gender = null) => {
+const signUp = async ({ username = '', name = '', email = '', password = '', gender = null }, cb = () => {}) => {
   try {
     const response = await fetch(`${SERVER_URL}/auth/join`, {
       method: 'POST',
@@ -40,20 +38,17 @@ const signUp = async (username = '', name = '', email = '', password = '', gende
     if (response.ok) {
       sessionStorage.setItem(KEY.ACCESS_TOKEN, resJson.token);
       sessionStorage.setItem(KEY.REFRESH_TOKEN, resJson.refresh_token);
-      return { token: resJson.token, error: resJson.error };
-    } else {
-      return { error: resJson.error };
-    };
+    }
+    cb(resJson.error);
   } catch (error) {
     throw new Error(`ERROR: ${error}`);
   }
 }
 
-const getToken = async (token) => {
-  const access_token = token ? token : sessionStorage.getItem(KEY.ACCESS_TOKEN);
+const renewToken = async (cb = () => {}) => {
+  const access_token = sessionStorage.getItem(KEY.ACCESS_TOKEN);
   const refresh_token = sessionStorage.getItem(KEY.REFRESH_TOKEN);
-  // console.log(`TOKEN RESTORED ACCESS: ${access_token}`);
-  // console.log(`TOKEN RESTORED REFRESH: ${refresh_token}`);
+  // TODO: don't send request if access token is not expired yet.
   if (refresh_token) {
     try {
       const response = await fetch(`${SERVER_URL}/auth/token`, {
@@ -67,21 +62,23 @@ const getToken = async (token) => {
       const resJson = await response.json();
       if (response.ok) {
         sessionStorage.setItem(KEY.ACCESS_TOKEN, resJson.token);
-        return { token: resJson.token, error: resJson.error };
+        cb(true);
       } else {
-        return { error: resJson.error };
+        cb(false);
       };
     } catch (error) {
       throw new Error(`ERROR: ${error}`);
     }
   } else {
-    return null;
+    cb(false);
   }
 }
+
+// TODO: check whether token is expired or not.
 
 export {
   signIn,
   signOut,
   signUp,
-  getToken
+  renewToken
 };

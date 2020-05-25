@@ -20,13 +20,13 @@ export default () => {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(null);
 
-	const { setSignedIn, setAccessToken } = useContext(AuthContext);
+	const { setSignedIn } = useContext(AuthContext);
 	const history = useHistory();
 
-	const handleSingin = async () => {
-		try {
-			const res = await signIn(username, password);
-			switch (res.error) {
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		signIn({ username, password}, (error) => {
+			switch (error) {
 				case ERROR_CODE.NO_SUCH_USER:
 					setError('Check your username!');
 					break;
@@ -34,21 +34,14 @@ export default () => {
 					setError('Check your password!')
 					break;
 				case ERROR_CODE.OK:
-					setAccessToken(res.token);
 					setSignedIn(true);
+					history.goBack(1);
 					break;
 				default:
 					setError('Server maintenance or Something. Sorry...');
 					break;
 			}
-		} catch (error) {
-			setError('Server maintenance or Something. Sorry...');
-		}
-	}
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		handleSingin();
+		});
 	}
 
 	return (
@@ -72,7 +65,7 @@ export default () => {
 					margin='normal'
 					onChange={(event) => setPassword(event.target.value)}
 				/>
-				<Button variant='contained' color='primary' type='submit' onClick={() => handleSingin()}>Sign In!</Button>
+				<Button variant='contained' color='primary' type='submit'>Sign In!</Button>
 				<Button variant='contained' color='primary' onClick={() => history.push('/join')}>JOIN!</Button>
 			</form>
 			<h3>{error}</h3>

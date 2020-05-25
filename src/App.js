@@ -4,80 +4,56 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
+  Route
 } from 'react-router-dom';
 
 // IMPORTING CONTEXTS
 import AuthContext from './AuthContext';
 
 // IMPORTING SCREENS
-import Home from './screens/Home';
-import Menu1 from './screens/Menu1';
-import Menu2 from './screens/Menu2';
-import Menu3 from './screens/Menu3';
-import Signin from './screens/Singin';
-import Join from './screens/Join';
+import HomeScreen from './screens/HomeScreen';
+import MyPageScreen from './screens/MyPageScreen';
+import SigninScreen from './screens/SigninScreen';
+import JoinScreen from './screens/JoinScreen';
 
 // IMPORTING COMPONENTS
-import Signout from './components/Signout';
 import MainHeader from './components/MainHeader';
 
 // IMPORTING UTILS
-import { getToken } from './js/auth_utils';
+import { renewToken } from './js/auth_utils';
 
 const AppRouter = () => {
-  const [accessToken, setAccessToken] = useState(null);
   const [isSignedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
-    const restoreToken = async () => {
-      const tokenJson = await getToken();
-      if (tokenJson) {
-        setAccessToken(tokenJson.token);
-        setSignedIn(true);
-      }
-    };
-    restoreToken();
+    renewToken(setSignedIn);
   }, []);
 
   return (
     <Router>
       <AuthContext.Provider
         value={{
-          accessToken,
-          setAccessToken,
+          isSignedIn,
           setSignedIn,
         }}
       >
-        <MainHeader isSignedIn={isSignedIn}/>
+        <MainHeader />
         <h1>{isSignedIn ? `로그인됨` : `로그인 안됨`}</h1>
         <Switch>
           <Route exact path='/'>
-            <Home />
+            <HomeScreen />
           </Route>
-          <Route path='/menu1'>
-            <Menu1 />
-          </Route>
-          <Route path='/menu2'>
-            <Menu2 />
-          </Route>
-          <Route path='/menu3'>
-            <Menu3 />
+          <Route path='/mypage'>
+            <MyPageScreen />
           </Route>
           <Route path='/signin'>
-            {isSignedIn
-            ? (
-              <Redirect to='/' />
-            ) :(
-              <Signin />
-            )}
-          </Route>
-          <Route path='/signout'>
-            <Signout />
+            <SigninScreen />
           </Route>
           <Route path='/join'>
-            <Join />
+            <JoinScreen />
+          </Route>
+          <Route path='*'>
+            <h1>404 NOT FOUND</h1>
           </Route>
         </Switch>
       </AuthContext.Provider>
