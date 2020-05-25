@@ -1,4 +1,4 @@
-import { SERVER_URL, KEY } from './defines';
+import { SERVER_URL, KEY, ERROR_CODE } from './defines';
 
 const signIn = async ({ username = '', password = '' }, cb = () => {}) => {
   try {
@@ -16,7 +16,7 @@ const signIn = async ({ username = '', password = '' }, cb = () => {}) => {
     }
     cb(resJson.error);
   } catch (error) {
-    throw new Error(`ERROR: ${error}`);
+    cb(ERROR_CODE.API_SERVER_DOWN);
   }
 }
 
@@ -41,7 +41,7 @@ const signUp = async ({ username = '', name = '', email = '', password = '', gen
     }
     cb(resJson.error);
   } catch (error) {
-    throw new Error(`ERROR: ${error}`);
+    cb(ERROR_CODE.API_SERVER_DOWN);
   }
 }
 
@@ -67,7 +67,7 @@ const renewToken = async (cb = () => {}) => {
         cb(false);
       };
     } catch (error) {
-      throw new Error(`ERROR: ${error}`);
+      cb(false);
     }
   } else {
     cb(false);

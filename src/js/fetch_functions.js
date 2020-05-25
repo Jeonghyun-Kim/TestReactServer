@@ -1,4 +1,4 @@
-import { SERVER_URL, KEY } from './defines';
+import { SERVER_URL, KEY, ERROR_CODE } from './defines';
 
 const getMyInfo = async (cb) => {
   const token = sessionStorage.getItem(KEY.ACCESS_TOKEN);
@@ -13,7 +13,7 @@ const getMyInfo = async (cb) => {
     const resJson = await response.json();
     cb(resJson);
   } catch (error) {
-    throw new Error(`ERROR: ${error}`);
+    cb({ error: ERROR_CODE.API_SERVER_DOWN });
   }
 }
 
@@ -30,7 +30,7 @@ const postPainting = async (formData, cb) => {
     const resJson = await response.json();
     cb(resJson);
   } catch (error) {
-    throw new Error(`ERROR: ${error}`);
+    cb({ error: ERROR_CODE.API_SERVER_DOWN });
   }
 }
 

@@ -38,7 +38,7 @@ export default () => {
 					break;
 				case ERROR_CODE.OK:
 					setSignedIn(true);
-					history.goBack(2);
+					history.goBack(1);
 					break;
 				default:
 					setError('Server maintenance or Something. Sorry...');
