@@ -13,7 +13,7 @@ import { postPainting } from '../js/fetch_functions';
 import { ERROR_CODE } from '../js/defines';
 
 export default () => {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState([]);
   const [name, setName] = useState('');
   const [painter, setPainter] = useState('');
   const [desc, setDesc] = useState('');
@@ -126,7 +126,7 @@ export default () => {
           />
           <div>Not for Sale</div>
         </div>
-        <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+        <input type="file" multiple onChange={(e) => setFile(e.target.files)} />
         <Button type="submit">Submit</Button>
         <div>{res}</div>
       </form>
