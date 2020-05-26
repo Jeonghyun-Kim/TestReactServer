@@ -22,6 +22,7 @@ export default () => {
 			switch (resJson.error) {
 				case ERROR_CODE.OK:
 					setUser(resJson.user);
+					setError(null);
 					break;
 				default:
 					setError(resJson.error);
@@ -34,18 +35,25 @@ export default () => {
 	return (
 		<>
 			<h2>My Page</h2>
-			{isLoading
+			{error
 			? (
-				<h2>loading...</h2>
+				<h1>{error}</h1>
 			) : (
-				<div>
-					<h5>username: {user.username}</h5>
-					<h5>name: {user.name}</h5>
-					<h5>email: {user.email}</h5>
-					<h5>gender: {user.gender}</h5>
-					<h3>{error ? error : null}</h3>
-				</div>
+				<>
+				{isLoading
+				? (
+					<h2>loading...</h2>
+				) : (
+					<div>
+						<h5>username: {user.username}</h5>
+						<h5>name: {user.name}</h5>
+						<h5>email: {user.email}</h5>
+						<h5>gender: {user.gender}</h5>
+					</div>
+				)}
+				</>
 			)}
+			
 		</>
 	)
 }

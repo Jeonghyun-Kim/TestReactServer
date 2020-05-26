@@ -1,3 +1,4 @@
+import { renewToken } from './auth_utils';
 import { SERVER_URL, KEY, ERROR_CODE } from './defines';
 
 const getMyInfo = async (cb) => {
@@ -11,6 +12,9 @@ const getMyInfo = async (cb) => {
       }
     });
     const resJson = await response.json();
+    if (resJson.error === ERROR_CODE.TOKEN_EXPIRED) {
+      return renewToken(flag => flag ? getMyInfo(cb) : cb({ error: ERROR_CODE.API_SERVER_DOWN }));
+    }
     cb(resJson);
   } catch (error) {
     cb({ error: ERROR_CODE.API_SERVER_DOWN });
@@ -23,12 +27,14 @@ const postPainting = async (formData, cb) => {
     const response = await fetch(`${SERVER_URL}/painting`, {
       method: 'POST',
       headers: {
-        // 'Content-Type': 'multipart/form-data',
         'Authorization': token,
       },
       body : formData
     })
     const resJson = await response.json();
+    if (resJson.error === ERROR_CODE.TOKEN_EXPIRED) {
+      return renewToken(flag => flag ? getMyInfo(cb) : cb({ error: ERROR_CODE.API_SERVER_DOWN }));
+    }
     cb(resJson);
   } catch (error) {
     cb({ error: ERROR_CODE.API_SERVER_DOWN });
