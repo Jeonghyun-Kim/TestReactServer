@@ -16,12 +16,15 @@ export default () => {
 	const [user, setUser] = useState(null);
 	const [error, setError] = useState(null);
 	const [isLoading, setLoading] = useState(true);
+	const [paintings, setPaintings] = useState([]);
 
 	useEffect(() => {
 		getMyInfo((resJson) => {
+			console.log(JSON.stringify(resJson));
 			switch (resJson.error) {
 				case ERROR_CODE.OK:
 					setUser(resJson.user);
+					setPaintings(resJson.paintings);
 					setError(null);
 					break;
 				default:

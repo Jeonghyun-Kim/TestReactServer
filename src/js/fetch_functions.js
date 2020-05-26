@@ -33,7 +33,27 @@ const postPainting = async (formData, cb) => {
     })
     const resJson = await response.json();
     if (resJson.error === ERROR_CODE.TOKEN_EXPIRED) {
-      return renewToken(flag => flag ? getMyInfo(cb) : cb({ error: ERROR_CODE.API_SERVER_DOWN }));
+      return renewToken(flag => flag ? postPainting(formData, cb) : cb({ error: ERROR_CODE.API_SERVER_DOWN }));
+    }
+    cb(resJson);
+  } catch (error) {
+    cb({ error: ERROR_CODE.API_SERVER_DOWN });
+  }
+}
+
+const getPainting = async (id, cb) => {
+  const token = sessionStorage.getItem(KEY.ACCESS_TOKEN);
+  try {
+    const response = await fetch(`${SERVER_URL}/painting/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    });
+    const resJson = await response.json();
+    if (resJson.error === ERROR_CODE.TOKEN_EXPIRED) {
+      return renewToken(flag => flag ? getPainting(id, cb) : cb({ error: ERROR_CODE.API_SERVER_DOWN }));
     }
     cb(resJson);
   } catch (error) {
@@ -43,5 +63,6 @@ const postPainting = async (formData, cb) => {
 
 export {
   getMyInfo,
-  postPainting
+  postPainting,
+  getPainting
 }
