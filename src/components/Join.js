@@ -10,6 +10,8 @@ import AuthContext from '../AuthContext';
 
 // IMPORTING UTILS
 import { signUp } from '../js/auth_utils';
+import { validateUsername, validateName, validateEmail,
+	validatePassword, validateSame } from '../js/validation';
 
 // IMPORTING DEFINES
 import { ERROR_CODE } from '../js/defines';
@@ -20,8 +22,14 @@ export default () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [password2, setPassword2] = useState('');
 	const [gender, setGender] = useState(null);
 	const [error, setError] = useState(null);
+	const [usernameError, setUsernameError] = useState(null);
+	const [nameError, setNameError] = useState(null);
+	const [emailError, setEmailError] = useState(null);
+	const [passwordError, setPasswordError] = useState(null);
+	const [password2Error, setPassword2Error] = useState(null);
 
 	const { setSignedIn } = useContext(AuthContext);
 	const history = useHistory();
@@ -57,7 +65,12 @@ export default () => {
 					value={username}
 					fullWidth
 					margin='normal'
-					onChange={(event) => setUsername(event.target.value)}
+					error={usernameError}
+					helperText={usernameError}
+					onChange={(event) => {
+						setUsernameError(validateUsername(event.target.value.toLowerCase()));
+						setUsername(event.target.value.toLowerCase());
+					}}
 				/>
 				<TextField
 					label='name'
@@ -65,7 +78,12 @@ export default () => {
 					value={name}
 					fullWidth
 					margin='normal'
-					onChange={(event) => setName(event.target.value)}
+					error={nameError}
+					helperText={nameError}
+					onChange={(event) => {
+						setNameError(validateName(event.target.value));
+						setName(event.target.value);
+					}}
 				/>
 				<TextField
 					label='e-mail'
@@ -73,7 +91,12 @@ export default () => {
 					value={email}
 					fullWidth
 					margin='normal'
-					onChange={(event) => setEmail(event.target.value)}
+					error={emailError}
+					helperText={emailError}
+					onChange={(event) => {
+						setEmailError(validateEmail(event.target.value.toLowerCase()));
+						setEmail(event.target.value.toLowerCase());
+					}}
 				/>
 				<TextField
 					label='password'
@@ -82,8 +105,28 @@ export default () => {
 					value={password}
 					fullWidth
 					margin='normal'
-					onChange={(event) => setPassword(event.target.value)}
+					error={passwordError}
+					helperText={passwordError}
+					onChange={(event) => {
+						setPasswordError(validatePassword(event.target.value));
+						setPassword(event.target.value);
+					}}
 				/>
+				<TextField
+					label='re-password'
+					type='password'
+					variant='outlined'
+					value={password2}
+					fullWidth
+					margin='normal'
+					error={password2Error}
+					helperText={password2Error}
+					onChange={(event) => {
+						setPassword2Error(validateSame(password, event.target.value));
+						setPassword2(event.target.value);
+					}}
+				/>
+				<h3>성별</h3>
 				<RadioGroup aria-label="gender" name="gender" value={gender} onChange={(event) => setGender(event.target.value)}>
 					<FormControlLabel value='Female' control={<Radio />} label="Female" />
 					<FormControlLabel value='Male' control={<Radio />} label="Male" />
