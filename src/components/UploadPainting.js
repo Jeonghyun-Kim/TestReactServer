@@ -13,7 +13,7 @@ import { postPainting } from '../js/fetch_functions';
 import { ERROR_CODE } from '../js/defines';
 
 export default () => {
-  const [file, setFile] = useState([]);
+  const [files, setFiles] = useState([]);
   const [name, setName] = useState('');
   const [painter, setPainter] = useState('');
   const [desc, setDesc] = useState('');
@@ -24,7 +24,7 @@ export default () => {
   const [onSale, setOnSale] = useState(false);
   const [res, setRes] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     // TODO: Input Validation
     event.preventDefault();
     const formData = new FormData();
@@ -36,7 +36,9 @@ export default () => {
     formData.append('height', height);
     formData.append('price', price);
     formData.append('onSale', onSale);
-    formData.append('painting', file);
+    for (let i = 0; i < files.length; i++) {
+      formData.append('paintings', files[i]);
+    }
     postPainting(formData, (resJson) => {
       switch (resJson.error) {
         case ERROR_CODE.AWS_S3_ERROR:
@@ -126,7 +128,7 @@ export default () => {
           />
           <div>Not for Sale</div>
         </div>
-        <input type="file" multiple onChange={(e) => setFile(e.target.files)} />
+        <input type="file" multiple onChange={(e) => setFiles(e.target.files)} />
         <Button type="submit">Submit</Button>
         <div>{res}</div>
       </form>
