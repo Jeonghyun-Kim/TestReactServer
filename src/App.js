@@ -1,6 +1,5 @@
 // IMPORTING LIBRARIES
 import React, { useState, useEffect } from 'react';
-// import logo from './logo.svg';
 import {
   BrowserRouter as Router,
   Switch,
@@ -39,7 +38,7 @@ const AppRouter = () => {
           setSignedIn,
         }}
       >
-        <MainHeader />
+        <MainHeader />  
         <Switch>
           <Route exact path='/'>
             <HomeScreen />

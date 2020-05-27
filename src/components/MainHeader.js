@@ -1,8 +1,10 @@
 // IMPORTING LIBRARIES
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/Appbar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 
 // IMPORTING CONTEXTS
 import AuthContext from '../AuthContext';
@@ -15,20 +17,19 @@ import { signOut } from '../js/auth_utils';
 // IMPORTING DEFINES
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    alignContent: 'space-around'
-  },
   menu: {
     margin: theme.spacing(1, 2, 1, 2),
     fontSize: 20,
     textDecoration: 'none',
     color: 'white'
+  },
+  grow: {
+    flexGrow: 1,
   }
 }))
 
 export default () => {
-  const { isSignedIn, setSignedIn } = useContext(AuthContext);
+  const { isSignedIn, setSignedIn } = React.useContext(AuthContext);
   const classes = useStyles();
 
   const handleSignout = () => {
@@ -38,13 +39,14 @@ export default () => {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={classes.grow}>
       <AppBar position='static'>
         <Toolbar>
           <Link className={classes.menu} to='/'> home </Link>
           <Link className={classes.menu} to='/mypage'> mypage </Link>
           <Link className={classes.menu} to='/painting/upload'> upload </Link>
           <Link className={classes.menu} to='/painting/test'>test</Link>
+          <div className={classes.grow} />
           {isSignedIn
           ? (
             <Button onClick={handleSignout}>
