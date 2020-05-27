@@ -5,9 +5,9 @@ const signIn = async ({ username = '', password = '' }, cb = () => {}) => {
     const response = await fetch(`${SERVER_URL}/auth/login`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password }),
     });
     const resJson = await response.json();
     if (response.ok) {
@@ -18,21 +18,25 @@ const signIn = async ({ username = '', password = '' }, cb = () => {}) => {
   } catch (error) {
     cb(ERROR_CODE.API_SERVER_DOWN);
   }
-}
+};
 
 const signOut = () => {
   sessionStorage.removeItem(KEY.ACCESS_TOKEN);
   sessionStorage.removeItem(KEY.REFRESH_TOKEN);
-}
+};
 
-const signUp = async ({ username = '', name = '', email = '', password = '', gender = null }, cb = () => {}) => {
+const signUp = async ({
+  username = '', name = '', email = '', password = '', gender = null,
+}, cb = () => {}) => {
   try {
     const response = await fetch(`${SERVER_URL}/auth/join`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, name, email, password, gender })
+      body: JSON.stringify({
+        username, name, email, password, gender,
+      }),
     });
     const resJson = await response.json();
     if (response.ok) {
@@ -43,21 +47,21 @@ const signUp = async ({ username = '', name = '', email = '', password = '', gen
   } catch (error) {
     cb(ERROR_CODE.API_SERVER_DOWN);
   }
-}
+};
 
 const renewToken = async (cb = () => {}) => {
-  const access_token = sessionStorage.getItem(KEY.ACCESS_TOKEN);
-  const refresh_token = sessionStorage.getItem(KEY.REFRESH_TOKEN);
+  const accessToken = sessionStorage.getItem(KEY.ACCESS_TOKEN);
+  const refreshToken = sessionStorage.getItem(KEY.REFRESH_TOKEN);
   // TODO: don't send request if access token is not expired yet.
-  if (refresh_token) {
+  if (refreshToken) {
     try {
       const response = await fetch(`${SERVER_URL}/auth/token`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': access_token
+          Authorization: accessToken,
         },
-        body: JSON.stringify({ refresh_token })
+        body: JSON.stringify({ refreshToken }),
       });
       const resJson = await response.json();
       if (response.ok) {
@@ -65,14 +69,14 @@ const renewToken = async (cb = () => {}) => {
         cb(true);
       } else {
         cb(false);
-      };
+      }
     } catch (error) {
       cb(false);
     }
   } else {
     cb(false);
   }
-}
+};
 
 // TODO: check whether token is expired or not.
 
@@ -80,5 +84,5 @@ export {
   signIn,
   signOut,
   signUp,
-  renewToken
+  renewToken,
 };

@@ -8,18 +8,24 @@ const getMyInfo = async (cb) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token
-      }
+        Authorization: token,
+      },
     });
     const resJson = await response.json();
     if (resJson.error === ERROR_CODE.TOKEN_EXPIRED) {
-      return renewToken(flag => flag ? getMyInfo(cb) : cb({ error: ERROR_CODE.API_SERVER_DOWN }));
+      renewToken((flag) => {
+        if (flag) {
+          getMyInfo(cb);
+        } else {
+          cb({ error: ERROR_CODE.API_SERVER_DOWN });
+        }
+      });
     }
     cb(resJson);
   } catch (error) {
     cb({ error: ERROR_CODE.API_SERVER_DOWN });
   }
-}
+};
 
 const postPainting = async (formData, cb) => {
   const token = sessionStorage.getItem(KEY.ACCESS_TOKEN);
@@ -27,19 +33,25 @@ const postPainting = async (formData, cb) => {
     const response = await fetch(`${SERVER_URL}/painting`, {
       method: 'POST',
       headers: {
-        'Authorization': token,
+        Authorization: token,
       },
-      body : formData
-    })
+      body: formData,
+    });
     const resJson = await response.json();
     if (resJson.error === ERROR_CODE.TOKEN_EXPIRED) {
-      return renewToken(flag => flag ? postPainting(formData, cb) : cb({ error: ERROR_CODE.API_SERVER_DOWN }));
+      renewToken((flag) => {
+        if (flag) {
+          postPainting(cb);
+        } else {
+          cb({ error: ERROR_CODE.API_SERVER_DOWN });
+        }
+      });
     }
     cb(resJson);
   } catch (error) {
     cb({ error: ERROR_CODE.API_SERVER_DOWN });
   }
-}
+};
 
 const getPainting = async (id, cb) => {
   const token = sessionStorage.getItem(KEY.ACCESS_TOKEN);
@@ -48,21 +60,27 @@ const getPainting = async (id, cb) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token
-      }
+        Authorization: token,
+      },
     });
     const resJson = await response.json();
     if (resJson.error === ERROR_CODE.TOKEN_EXPIRED) {
-      return renewToken(flag => flag ? getPainting(id, cb) : cb({ error: ERROR_CODE.API_SERVER_DOWN }));
+      renewToken((flag) => {
+        if (flag) {
+          getPainting(cb);
+        } else {
+          cb({ error: ERROR_CODE.API_SERVER_DOWN });
+        }
+      });
     }
     cb(resJson);
   } catch (error) {
     cb({ error: ERROR_CODE.API_SERVER_DOWN });
   }
-}
+};
 
 export {
   getMyInfo,
   postPainting,
-  getPainting
-}
+  getPainting,
+};

@@ -13,15 +13,15 @@ import NeedSignin from '../components/NeedSignin';
 // IMPORTING DEFINES
 
 export default () => {
-	const { isSignedIn } = useContext(AuthContext);
-	return (
-		<>
-		{isSignedIn
-		? (
-			<PaintingItem itemId={3} />
-		) : (
-			<NeedSignin />
-		)}
-		</>
-	)
-}
+  const { isSignedIn } = useContext(AuthContext);
+  return (
+    <>
+      {isSignedIn
+        ? (
+          <PaintingItem itemId={3} />
+        ) : (
+          <NeedSignin />
+        )}
+    </>
+  );
+};

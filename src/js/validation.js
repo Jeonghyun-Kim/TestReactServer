@@ -1,5 +1,4 @@
 const validateUsername = (username) => {
-  username = username.toLowerCase();
   if (username.length === 0) {
     return 'username can\'t be empty';
   }
@@ -19,7 +18,7 @@ const validateUsername = (username) => {
     return 'can\'t start with triple underscore';
   }
   return false;
-}
+};
 
 const validateName = (name) => {
   if (name.length === 0) {
@@ -32,10 +31,10 @@ const validateName = (name) => {
     return 'cannot use special characters';
   }
   if (name.length > 30) {
-    return 'too long name'
+    return 'too long name';
   }
   return false;
-}
+};
 
 const validateEmail = (email) => {
   if (email.length === 0) {
@@ -46,7 +45,7 @@ const validateEmail = (email) => {
     return 'invalid email address';
   }
   return false;
-}
+};
 
 const validatePassword = (password) => {
   if (password.length === 0) {
@@ -60,19 +59,19 @@ const validatePassword = (password) => {
   }
   // TODO: 2가지 종류 이상.
   return false;
-}
+};
 
 const validateSame = (input1, input2) => {
   if (input1 !== input2) {
     return 'no match';
   }
   return false;
-}
+};
 
 export {
   validateUsername,
   validateName,
   validateEmail,
   validatePassword,
-  validateSame
-}
+  validateSame,
+};

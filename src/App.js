@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from 'react-router-dom';
 
 // IMPORTING CONTEXTS
@@ -32,39 +32,22 @@ const AppRouter = () => {
 
   return (
     <Router>
-      <AuthContext.Provider
-        value={{
-          isSignedIn,
-          setSignedIn,
-        }}
-      >
-        <MainHeader />  
+      <AuthContext.Provider value={{ isSignedIn, setSignedIn }}>
+        <MainHeader />
         <Switch>
-          <Route exact path='/'>
-            <HomeScreen />
-          </Route>
-          <Route path='/mypage'>
-            <MyPageScreen />
-          </Route>
-          <Route path='/painting/upload'>
-            <UploadScreen />
-          </Route>
-          <Route path='/painting/test'>
-            <PaintingScreen />
-          </Route>
-          <Route path='/signin'>
-            <SigninScreen />
-          </Route>
-          <Route path='/join'>
-            <JoinScreen />
-          </Route>
-          <Route path='*'>
+          <Route exact path="/" component={HomeScreen} />
+          <Route path="/mypage" component={MyPageScreen} />
+          <Route path="/painting/upload" component={UploadScreen} />
+          <Route path="/painting/test" component={PaintingScreen} />
+          <Route path="/signin" component={SigninScreen} />
+          <Route path="/join" component={JoinScreen} />
+          <Route path="*">
             <h1>404 NOT FOUND</h1>
           </Route>
         </Switch>
       </AuthContext.Provider>
     </Router>
-  )
-}
+  );
+};
 
 export default AppRouter;

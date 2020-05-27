@@ -17,11 +17,12 @@ export default () => {
     <>
       <h2>You need to sign in to view this page!</h2>
       <Button
-        variant='contained'
-        color='primary'
-        onClick={() => history.push('/signin')
-      }>
-        Sign In</Button>
+        variant="contained"
+        color="primary"
+        onClick={() => history.push('/signin')}
+      >
+        Sign In
+      </Button>
     </>
-  )
-}
+  );
+};

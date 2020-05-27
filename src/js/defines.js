@@ -1,14 +1,14 @@
 const SERVER_URL = '';
-const S3_URL = 's3.ap-northeast-2.amazonaws.com'
+const S3_URL = 's3.ap-northeast-2.amazonaws.com';
 const STORAGE_URL = {
   PAINTING: `https://palette-painting-s3.${S3_URL}`,
-  PROFILE: `https://palette-profile-s3.${S3_URL}`
-}
+  PROFILE: `https://palette-profile-s3.${S3_URL}`,
+};
 
 const KEY = {
   ACCESS_TOKEN: '@access_token',
-  REFRESH_TOKEN: '@refresh_token'
-}
+  REFRESH_TOKEN: '@refresh_token',
+};
 
 const ERROR_CODE = {
   COMMON_ERROR: -1,
@@ -29,5 +29,5 @@ export {
   SERVER_URL,
   STORAGE_URL,
   KEY,
-  ERROR_CODE
+  ERROR_CODE,
 };

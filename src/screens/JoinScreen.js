@@ -12,15 +12,15 @@ import Join from '../components/Join';
 // IMPORTING DEFINES
 
 export default () => {
-	const { isSignedIn } = useContext(AuthContext);
-	return (
-		<>
-		{isSignedIn
-		? (
-			<h2>You are already Signed In!</h2>
-		) : (
-			<Join />
-		)}
-		</>
-	)
-}
+  const { isSignedIn } = useContext(AuthContext);
+  return (
+    <>
+      {isSignedIn
+        ? (
+          <h2>You are already Signed In!</h2>
+        ) : (
+          <Join />
+        )}
+    </>
+  );
+};

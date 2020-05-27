@@ -36,9 +36,12 @@ export default () => {
     formData.append('height', height);
     formData.append('price', price);
     formData.append('onSale', onSale);
-    for (let i = 0; i < files.length; i++) {
-      formData.append('paintings', files[i]);
-    }
+    // for (let i = 0; i < files.length; i++) {
+    //   formData.append('paintings', files[i]);
+    // }
+    files.forEach((item) => {
+      formData.append('paintings', item);
+    });
     postPainting(formData, (resJson) => {
       switch (resJson.error) {
         case ERROR_CODE.AWS_S3_ERROR:
@@ -52,71 +55,71 @@ export default () => {
           break;
       }
     });
-  }
+  };
 
-  const handleOnSale = (event) => {
-    setOnSale(onSale ? false : true);
-  }
+  const handleOnSale = () => {
+    setOnSale(!onSale);
+  };
 
   return (
     <>
       <h2>File Upload</h2>
       <form onSubmit={handleSubmit}>
         <TextField
-          label='name'
-          variant='outlined'
+          label="name"
+          variant="outlined"
           value={name}
-          margin='normal'
+          margin="normal"
           onChange={(event) => setName(event.target.value)}
         />
         <TextField
-          label='painter'
-          variant='outlined'
+          label="painter"
+          variant="outlined"
           value={painter}
-          margin='normal'
+          margin="normal"
           onChange={(event) => setPainter(event.target.value)}
         />
         <TextField
-          label='description'
-          variant='outlined'
+          label="description"
+          variant="outlined"
           value={desc}
           multiline
           fullWidth
-          margin='normal'
+          margin="normal"
           onChange={(event) => setDesc(event.target.value)}
         />
         <TextField
-          label='material'
-          variant='outlined'
+          label="material"
+          variant="outlined"
           value={material}
-          margin='normal'
+          margin="normal"
           fullWidth
           onChange={(event) => setMaterial(event.target.value)}
         />
         <TextField
-          label='width'
-          variant='outlined'
+          label="width"
+          variant="outlined"
           value={width}
-          margin='normal'
+          margin="normal"
           onChange={(event) => setWidth(event.target.value)}
         />
         <TextField
-          label='height'
-          variant='outlined'
+          label="height"
+          variant="outlined"
           value={height}
-          margin='normal'
+          margin="normal"
           onChange={(event) => setHeight(event.target.value)}
         />
         <TextField
-          label='price'
-          variant='outlined'
+          label="price"
+          variant="outlined"
           value={price}
           multiline
           fullWidth
-          margin='normal'
+          margin="normal"
           onChange={(event) => setPrice(event.target.value)}
         />
-				<div>
+        <div>
           <Radio
             checked={onSale}
             onChange={handleOnSale}
@@ -133,5 +136,5 @@ export default () => {
         <div>{res}</div>
       </form>
     </>
-  )
-}
+  );
+};

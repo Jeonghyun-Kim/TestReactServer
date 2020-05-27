@@ -17,16 +17,16 @@ import Signin from '../components/Signin';
 // }))
 
 export default () => {
-	const { isSignedIn } = useContext(AuthContext);
+  const { isSignedIn } = useContext(AuthContext);
   // const classes = useStyles();
-	return (
-		<Container maxWidth='sm'>
-		{isSignedIn
-		? (
-			<h2>You are already Signed In!</h2>
-		) : (
-			<Signin />
-		)}
-		</Container>
-	)
-}
+  return (
+    <Container maxWidth="sm">
+      {isSignedIn
+        ? (
+          <h2>You are already Signed In!</h2>
+        ) : (
+          <Signin />
+        )}
+    </Container>
+  );
+};
