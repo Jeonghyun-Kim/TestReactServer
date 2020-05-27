@@ -16,7 +16,7 @@ export default () => {
 	const [user, setUser] = useState(null);
 	const [error, setError] = useState(null);
 	const [isLoading, setLoading] = useState(true);
-	const [paintings, setPaintings] = useState([]);
+	// const [paintings, setPaintings] = useState([]);
 
 	useEffect(() => {
 		getMyInfo((resJson) => {
@@ -24,7 +24,7 @@ export default () => {
 			switch (resJson.error) {
 				case ERROR_CODE.OK:
 					setUser(resJson.user);
-					setPaintings(resJson.paintings);
+					// setPaintings(resJson.paintings);
 					setError(null);
 					break;
 				default:

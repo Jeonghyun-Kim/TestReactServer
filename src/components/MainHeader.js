@@ -20,6 +20,7 @@ export default () => {
       <Link to='/'> home </Link>
       <Link to='/mypage'> mypage </Link>
       <Link to='/painting/upload'> upload </Link>
+      <Link to='/painting/test'>test</Link>
       {isSignedIn
       ? (
         <SignoutButton>로그아웃</SignoutButton>
