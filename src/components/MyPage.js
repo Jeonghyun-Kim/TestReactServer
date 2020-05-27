@@ -20,7 +20,6 @@ export default () => {
 
 	useEffect(() => {
 		getMyInfo((resJson) => {
-			console.log(JSON.stringify(resJson));
 			switch (resJson.error) {
 				case ERROR_CODE.OK:
 					setUser(resJson.user);

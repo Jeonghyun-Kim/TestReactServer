@@ -25,3 +25,4 @@ yarn-error.log*
 # custom
 defaultComponent.js
 defaultScreen.js
+src/ignored/*

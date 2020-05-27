@@ -40,7 +40,6 @@ const AppRouter = () => {
         }}
       >
         <MainHeader />
-        <h1>{isSignedIn ? `로그인됨` : `로그인 안됨`}</h1>
         <Switch>
           <Route exact path='/'>
             <HomeScreen />
