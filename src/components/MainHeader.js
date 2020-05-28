@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 // IMPORTING CONTEXTS
 import AuthContext from '../AuthContext';
@@ -34,7 +34,6 @@ export default () => {
 
   const handleSignout = () => {
     signOut();
-    alert('성공적으로 로그아웃 되었습니다.');
     setSignedIn(false);
   };
 
@@ -49,11 +48,11 @@ export default () => {
           <div className={classes.grow} />
           {isSignedIn
             ? (
-              <Button onClick={handleSignout}>
-                <Link className={classes.menu} to="/"> 로그아웃 </Link>
-              </Button>
+              <Box onClick={handleSignout}>
+                logout
+              </Box>
             ) : (
-              <Link className={classes.menu} to="/signin"> 로그인 </Link>
+              <Link className={classes.menu} to="/signin"> login </Link>
             )}
         </Toolbar>
       </AppBar>
