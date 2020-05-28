@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  logout: {
+    cursor: 'pointer',
+  },
 }));
 
 export default () => {
@@ -48,7 +51,7 @@ export default () => {
           <div className={classes.grow} />
           {isSignedIn
             ? (
-              <Box onClick={handleSignout}>
+              <Box onClick={handleSignout} className={classes.logout}>
                 logout
               </Box>
             ) : (

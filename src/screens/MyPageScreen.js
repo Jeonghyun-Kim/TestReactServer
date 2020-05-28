@@ -1,5 +1,6 @@
 // IMPORTING LIBRARIES
 import React from 'react';
+import Container from '@material-ui/core/Container';
 
 // IMPORTING UTILS
 
@@ -15,13 +16,13 @@ import NeedSignIn from '../components/NeedSignin';
 export default () => {
   const { isSignedIn } = React.useContext(AuthContext);
   return (
-    <>
+    <Container maxWidth="sm">
       {isSignedIn
         ? (
           <MyPage />
         ) : (
           <NeedSignIn />
         )}
-    </>
+    </Container>
   );
 };
