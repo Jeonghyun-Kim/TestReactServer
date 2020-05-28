@@ -61,7 +61,7 @@ const renewToken = async (cb = () => {}) => {
           'Content-Type': 'application/json',
           Authorization: accessToken,
         },
-        body: JSON.stringify({ refreshToken }),
+        body: JSON.stringify({ refresh_token: refreshToken }),
       });
       const resJson = await response.json();
       if (response.ok) {
