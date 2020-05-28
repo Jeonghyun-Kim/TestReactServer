@@ -1,5 +1,5 @@
 // IMPORTING LIBRARIES
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 // IMPORTING CONTEXTS
 
@@ -13,12 +13,12 @@ import { ERROR_CODE } from '../js/defines';
 
 export default () => {
   // TODO: user default value with json
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setLoading] = useState(true);
-  // const [paintings, setPaintings] = useState([]);
+  const [user, setUser] = React.useState(null);
+  const [error, setError] = React.useState(null);
+  const [isLoading, setLoading] = React.useState(true);
+  // const [paintings, setPaintings] = React.useState([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     getMyInfo((resJson) => {
       switch (resJson.error) {
         case ERROR_CODE.OK:

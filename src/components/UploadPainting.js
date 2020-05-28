@@ -1,5 +1,5 @@
 // IMPORTING LIBRARIES
-import React, { useState } from 'react';
+import React from 'react';
 // import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
@@ -29,16 +29,16 @@ import { ERROR_CODE } from '../js/defines';
 // }));
 
 export default () => {
-  const [files, setFiles] = useState([]);
-  const [name, setName] = useState('');
-  const [painter, setPainter] = useState('');
-  const [desc, setDesc] = useState('');
-  const [material, setMaterial] = useState('');
-  const [width, setWidth] = useState('');
-  const [height, setHeight] = useState('');
-  const [price, setPrice] = useState('');
-  const [onSale, setOnSale] = useState('false');
-  const [res, setRes] = useState(null);
+  const [files, setFiles] = React.useState([]);
+  const [name, setName] = React.useState('');
+  const [painter, setPainter] = React.useState('');
+  const [desc, setDesc] = React.useState('');
+  const [material, setMaterial] = React.useState('');
+  const [width, setWidth] = React.useState('');
+  const [height, setHeight] = React.useState('');
+  const [price, setPrice] = React.useState('');
+  const [onSale, setOnSale] = React.useState('false');
+  const [res, setRes] = React.useState(null);
 
   // const classes = useStyles();
 

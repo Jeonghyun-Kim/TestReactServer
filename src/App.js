@@ -1,5 +1,5 @@
 // IMPORTING LIBRARIES
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -24,9 +24,9 @@ import MainHeader from './components/MainHeader';
 import { renewToken } from './js/auth_utils';
 
 const AppRouter = () => {
-  const [isSignedIn, setSignedIn] = useState(false);
+  const [isSignedIn, setSignedIn] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     renewToken(setSignedIn);
   }, []);
 

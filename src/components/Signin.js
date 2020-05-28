@@ -1,12 +1,13 @@
 // IMPORTING LIBRARIES
-import React, { useContext, useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import React from 'react';
+import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 
 // IMPORTING CONTEXTS
 import AuthContext from '../AuthContext';
 
 // IMPORTING COMPONENTS
+import TextInput from './Input/TextInput';
 
 // IMPORTING UTILS
 import { signIn } from '../js/auth_utils';
@@ -16,11 +17,11 @@ import { ERROR_CODE } from '../js/defines';
 
 // TODO: INPUT VALIDATION
 export default () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [error, setError] = React.useState(null);
 
-  const { setSignedIn } = useContext(AuthContext);
+  const { setSignedIn } = React.useContext(AuthContext);
   const history = useHistory();
 
   const handleSubmit = (event) => {
@@ -48,22 +49,16 @@ export default () => {
     <>
       <h2>Sign In Page!</h2>
       <form onSubmit={handleSubmit}>
-        <TextField
+        <TextInput
           label="username"
-          variant="outlined"
           value={username}
-          fullWidth
-          margin="normal"
-          onChange={(event) => setUsername(event.target.value)}
+          setValue={setUsername}
         />
-        <TextField
+        <TextInput
           label="password"
           type="password"
-          variant="outlined"
           value={password}
-          fullWidth
-          margin="normal"
-          onChange={(event) => setPassword(event.target.value)}
+          setValue={setPassword}
         />
         <Button variant="contained" color="primary" type="submit">Sign In!</Button>
         <Button variant="contained" color="primary" onClick={() => history.push('/join')}>JOIN!</Button>

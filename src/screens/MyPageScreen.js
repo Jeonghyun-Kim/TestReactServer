@@ -1,5 +1,5 @@
 // IMPORTING LIBRARIES
-import React, { useContext } from 'react';
+import React from 'react';
 
 // IMPORTING UTILS
 
@@ -13,7 +13,7 @@ import NeedSignIn from '../components/NeedSignin';
 // IMPORTING DEFINES
 
 export default () => {
-  const { isSignedIn } = useContext(AuthContext);
+  const { isSignedIn } = React.useContext(AuthContext);
   return (
     <>
       {isSignedIn

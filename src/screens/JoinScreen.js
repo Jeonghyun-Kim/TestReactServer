@@ -1,5 +1,5 @@
 // IMPORTING LIBRARIES
-import React, { useContext } from 'react';
+import React from 'react';
 
 // IMPORTING UTILS
 
@@ -12,7 +12,7 @@ import Join from '../components/Join';
 // IMPORTING DEFINES
 
 export default () => {
-  const { isSignedIn } = useContext(AuthContext);
+  const { isSignedIn } = React.useContext(AuthContext);
   return (
     <>
       {isSignedIn

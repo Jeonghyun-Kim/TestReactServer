@@ -1,5 +1,5 @@
 // IMPORTING LIBRARIES
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -26,20 +26,20 @@ import { ERROR_CODE } from '../js/defines';
 
 // TODO: INPUT VALIDATION
 export default () => {
-  const [username, setUsername] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [gender, setGender] = useState(null);
-  const [error, setError] = useState(null);
-  const [usernameError, setUsernameError] = useState(null);
-  const [nameError, setNameError] = useState(null);
-  const [emailError, setEmailError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
-  const [password2Error, setPassword2Error] = useState(null);
+  const [username, setUsername] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [password2, setPassword2] = React.useState('');
+  const [gender, setGender] = React.useState(null);
+  const [error, setError] = React.useState(null);
+  const [usernameError, setUsernameError] = React.useState(null);
+  const [nameError, setNameError] = React.useState(null);
+  const [emailError, setEmailError] = React.useState(null);
+  const [passwordError, setPasswordError] = React.useState(null);
+  const [password2Error, setPassword2Error] = React.useState(null);
 
-  const { setSignedIn } = useContext(AuthContext);
+  const { setSignedIn } = React.useContext(AuthContext);
   const history = useHistory();
 
   const handleSubmit = (event) => {
