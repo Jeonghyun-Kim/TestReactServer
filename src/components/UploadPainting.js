@@ -54,10 +54,8 @@ export default () => {
     formData.append('height', height);
     formData.append('price', price);
     formData.append('onSale', onSale);
-    // for (let i = 0; i < files.length; i++) {
-    //   formData.append('paintings', files[i]);
-    // }
-    files.forEach((item) => {
+
+    Array.from(files).forEach((item) => {
       formData.append('paintings', item);
     });
     postPainting(formData, (resJson) => {
