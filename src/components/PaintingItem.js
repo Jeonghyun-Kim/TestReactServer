@@ -54,34 +54,38 @@ export default function PaintingItem({ itemId }) {
   const [painting, dispatchPainting] = React.useReducer(paintingReducer, initailPaintingState);
 
   React.useEffect(() => {
+    let isSubscribed = true;
     getPainting(itemId, (resJson) => {
-      if (resJson.error === ERROR_CODE.OK) {
-        const {
-          id, painter, name, description, material,
-          width, height, price, onSale, numLikes,
-        } = resJson.painting;
-        const { images } = resJson;
+      if (isSubscribed) {
+        if (resJson.error === ERROR_CODE.OK) {
+          const {
+            id, painter, name, description, material,
+            width, height, price, onSale, numLikes,
+          } = resJson.painting;
+          const { images } = resJson;
 
-        dispatchPainting({
-          type: 'setPainting',
-          painting: {
-            id,
-            painter,
-            name,
-            description,
-            material,
-            size: [width, height],
-            price,
-            onSale,
-            numLikes,
-            images,
-            currentImage: 0,
-          },
-        });
-      } else {
-        dispatchPainting({ type: 'reset' });
+          dispatchPainting({
+            type: 'setPainting',
+            painting: {
+              id,
+              painter,
+              name,
+              description,
+              material,
+              size: [width, height],
+              price,
+              onSale,
+              numLikes,
+              images,
+              currentImage: 0,
+            },
+          });
+        } else {
+          dispatchPainting({ type: 'reset' });
+        }
       }
     });
+    return () => { isSubscribed = false; };
   }, [itemId]);
 
   const handleNextImage = () => {

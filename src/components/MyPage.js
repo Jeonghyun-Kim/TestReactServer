@@ -19,19 +19,23 @@ export default () => {
   // const [paintings, setPaintings] = React.useState([]);
 
   React.useEffect(() => {
+    let isSubscribed = true;
     getMyInfo((resJson) => {
-      switch (resJson.error) {
-        case ERROR_CODE.OK:
-          setUser(resJson.user);
-          // setPaintings(resJson.paintings);
-          setError(null);
-          break;
-        default:
-          setError(resJson.error);
-          break;
+      if (isSubscribed) {
+        switch (resJson.error) {
+          case ERROR_CODE.OK:
+            setUser(resJson.user);
+            // setPaintings(resJson.paintings);
+            setError(null);
+            break;
+          default:
+            setError(resJson.error);
+            break;
+        }
       }
       setLoading(false);
     });
+    return () => { isSubscribed = false; };
   }, []);
 
   return (

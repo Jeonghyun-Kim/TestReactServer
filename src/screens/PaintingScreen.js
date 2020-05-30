@@ -18,7 +18,7 @@ export default () => {
     <>
       {isSignedIn
         ? (
-          <PaintingItem itemId={3} />
+          <PaintingItem itemId={2} />
         ) : (
           <NeedSignin />
         )}
