@@ -67,7 +67,7 @@ const getPainting = async (id, cb) => {
     if (resJson.error === ERROR_CODE.TOKEN_EXPIRED) {
       renewToken((flag) => {
         if (flag) {
-          getPainting(cb);
+          getPainting(id, cb);
         } else {
           cb({ error: ERROR_CODE.API_SERVER_DOWN });
         }
