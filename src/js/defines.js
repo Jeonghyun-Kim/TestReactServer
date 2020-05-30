@@ -1,7 +1,7 @@
 const SERVER_URL = '';
 const S3_URL = 's3.ap-northeast-2.amazonaws.com';
 const STORAGE_URL = {
-  PAINTING: `https://palette-painting-s3.${S3_URL}`,
+  PAINTING: 'https://d29ybku8yqgqrh.cloudfront.net',
   PROFILE: `https://palette-profile-s3.${S3_URL}`,
 };
 
