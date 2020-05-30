@@ -5,12 +5,11 @@ import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
 
 // IMPORTING CONTEXTS
 
 // IMPORTING COMPONENTS
-import GridContainer from './Grid/GridContainer';
-import GridItem from './Grid/GridItem';
 import TextInput from './Input/TextInput';
 
 // IMPORTING UTILS
@@ -77,29 +76,29 @@ export default () => {
     <>
       <h2>File Upload</h2>
       <form onSubmit={handleSubmit}>
-        <GridContainer>
-          <GridItem xs={12} sm={6}>
+        <Grid container>
+          <Grid item xs={12} sm={6}>
             <TextInput label="이름" value={name} setValue={setName} />
-          </GridItem>
-          <GridItem xs={12} sm={6}>
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <TextInput label="작가" value={painter} setValue={setPainter} />
-          </GridItem>
-          <GridItem xs={12} sm={12}>
+          </Grid>
+          <Grid item xs={12} sm={12}>
             <TextInput label="설명" value={desc} setValue={setDesc} />
-          </GridItem>
-          <GridItem xs={12} sm={6}>
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <TextInput label="재료" value={material} setValue={setMaterial} />
-          </GridItem>
-          <GridItem xs={6} sm={3}>
+          </Grid>
+          <Grid item xs={6} sm={3}>
             <TextInput label="가로길이" value={width} setValue={setWidth} />
-          </GridItem>
-          <GridItem xs={6} sm={3}>
+          </Grid>
+          <Grid item xs={6} sm={3}>
             <TextInput label="세로길이" value={height} setValue={setHeight} />
-          </GridItem>
-          <GridItem xs={12} sm={6}>
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <TextInput label="가격" value={price} setValue={setPrice} />
-          </GridItem>
-        </GridContainer>
+          </Grid>
+        </Grid>
         <RadioGroup aria-label="gender" name="gender" value={onSale} onChange={(event) => setOnSale(event.target.value)}>
           <FormControlLabel value="true" control={<Radio />} label="On Sale" />
           <FormControlLabel value="false" control={<Radio />} label="Not for Sale" />

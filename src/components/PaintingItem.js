@@ -3,12 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 // IMPORTING CONTEXTS
 
 // IMPORTING COMPONENTS
-import GridContainer from './Grid/GridContainer';
-import GridItem from './Grid/GridItem';
 
 // IMPORTING UTILS
 import { getPainting } from '../js/fetch_functions';
@@ -102,26 +101,24 @@ export default function PaintingItem({ itemId }) {
         ? (
           <h1>Loading...</h1>
         ) : (
-          <GridContainer
-            container
-          >
-            <GridItem xs={12} sm={8} align="center">
+          <Grid container>
+            <Grid item container xs={12} sm={8} align="center">
               <Paper elevation={2}>
-                <GridItem xs={12}>
+                <Grid item xs={12}>
                   <img
                     src={`${STORAGE_URL.PAINTING}/${painting.images[painting.currentImage].url}`}
                     alt="PAINTING"
                     style={{ maxWidth: '100%' }}
                   />
-                </GridItem>
-                <GridItem xs={12}>
+                </Grid>
+                <Grid item xs={12}>
                   {painting.currentImage + 1}
                   {' '}
                   /
                   {' '}
                   {painting.images.length}
-                </GridItem>
-                <GridItem xs={12}>
+                </Grid>
+                <Grid item xs={12}>
                   <Button
                     varinat="contained"
                     onClick={handlePrevImage}
@@ -136,10 +133,10 @@ export default function PaintingItem({ itemId }) {
                   >
                     Next
                   </Button>
-                </GridItem>
+                </Grid>
               </Paper>
-            </GridItem>
-            <GridItem xs={12} sm={4}>
+            </Grid>
+            <Grid item xs={12} sm={4}>
               <Paper elevation={2}>
                 <div>작가: {painting.painter}</div>
                 <div>작품명: {painting.name}</div>
@@ -150,8 +147,8 @@ export default function PaintingItem({ itemId }) {
                 <div>가격: {painting.price}</div>
                 <div>좋아요 수: {painting.numLikes}</div>
               </Paper>
-            </GridItem>
-          </GridContainer>
+            </Grid>
+          </Grid>
         )}
     </>
   );
