@@ -32,8 +32,8 @@ export default () => {
             setError(resJson.error);
             break;
         }
+        setLoading(false);
       }
-      setLoading(false);
     });
     return () => { isSubscribed = false; };
   }, []);
