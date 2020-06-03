@@ -15,8 +15,8 @@ import HomeScreen from './screens/HomeScreen';
 import MyPageScreen from './screens/MyPageScreen';
 import SigninScreen from './screens/SigninScreen';
 import JoinScreen from './screens/JoinScreen';
-import UploadScreen from './screens/UploadScreen';
-import PaintingScreen from './screens/PaintingScreen';
+// import UploadScreen from './screens/UploadScreen';
+// import PaintingScreen from './screens/PaintingScreen';
 
 // IMPORTING COMPONENTS
 import MainHeader from './components/MainHeader';
@@ -38,8 +38,8 @@ const AppRouter = () => {
         <Switch>
           <Route exact path="/" component={HomeScreen} />
           <Route path="/mypage" component={MyPageScreen} />
-          <Route path="/painting/upload" component={UploadScreen} />
-          <Route path="/painting/test" component={PaintingScreen} />
+          {/* <Route path="/painting/upload" component={UploadScreen} /> */}
+          {/* <Route path="/painting/test" component={PaintingScreen} /> */}
           <Route path="/signin" component={SigninScreen} />
           <Route path="/join" component={JoinScreen} />
           <Route path="*">

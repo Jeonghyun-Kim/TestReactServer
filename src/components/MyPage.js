@@ -12,7 +12,9 @@ import { getMyInfo } from '../js/fetch_functions';
 
 export default () => {
   // TODO: user default value with json
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = React.useState({
+    nick: null, name: null, email: null, gender: 'secret',
+  });
   const [error, setError] = React.useState(null);
   const [isLoading, setLoading] = React.useState(true);
   // const [paintings, setPaintings] = React.useState([]);

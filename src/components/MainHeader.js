@@ -46,8 +46,8 @@ export default () => {
         <Toolbar>
           <Link className={classes.menu} to="/"> home </Link>
           <Link className={classes.menu} to="/mypage"> mypage </Link>
-          <Link className={classes.menu} to="/painting/upload"> upload </Link>
-          <Link className={classes.menu} to="/painting/test">test</Link>
+          {/* <Link className={classes.menu} to="/painting/upload"> upload </Link>
+          <Link className={classes.menu} to="/painting/test">test</Link> */}
           <div className={classes.grow} />
           {isSignedIn
             ? (
