@@ -17,7 +17,7 @@ import { ERROR_CODE } from '../js/defines';
 
 // TODO: INPUT VALIDATION
 export default () => {
-  const [username, setUsername] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState(null);
 
@@ -26,15 +26,16 @@ export default () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    signIn({ username, password }, (err) => {
+    setError(null);
+    signIn({ email, password }, (err) => {
       switch (err) {
         case ERROR_CODE.NO_SUCH_USER:
-          setError('Check your username!');
+          setError('Check your email!');
           break;
         case ERROR_CODE.PASSWORD_WRONG:
           setError('Check your password!');
           break;
-        case ERROR_CODE.OK:
+        case undefined:
           setSignedIn(true);
           history.goBack(1);
           break;
@@ -50,9 +51,9 @@ export default () => {
       <h2>Sign In Page!</h2>
       <form onSubmit={handleSubmit}>
         <TextInput
-          label="username"
-          value={username}
-          setValue={setUsername}
+          label="email"
+          value={email}
+          setValue={setEmail}
         />
         <TextInput
           label="password"

@@ -1,18 +1,18 @@
 import { SERVER_URL, KEY, ERROR_CODE } from './defines';
 
-const signIn = async ({ username = '', password = '' }, cb = () => {}) => {
+const signIn = async ({ email = '', password = '' }, cb = () => {}) => {
   try {
     const response = await fetch(`${SERVER_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     });
     const resJson = await response.json();
     if (response.ok) {
-      sessionStorage.setItem(KEY.ACCESS_TOKEN, resJson.token);
-      sessionStorage.setItem(KEY.REFRESH_TOKEN, resJson.refresh_token);
+      sessionStorage.setItem(KEY.ACCESS_TOKEN, resJson.accessToken);
+      sessionStorage.setItem(KEY.REFRESH_TOKEN, resJson.refreshToken);
     }
     cb(resJson.error);
   } catch (error) {
@@ -26,7 +26,7 @@ const signOut = () => {
 };
 
 const signUp = async ({
-  username = '', name = '', email = '', password = '', gender = null,
+  nick = '', name = '', email = '', password = '', gender = 'secret',
 }, cb = () => {}) => {
   try {
     const response = await fetch(`${SERVER_URL}/auth/join`, {
@@ -35,13 +35,13 @@ const signUp = async ({
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username, name, email, password, gender,
+        nick, name, email, password, gender,
       }),
     });
     const resJson = await response.json();
     if (response.ok) {
-      sessionStorage.setItem(KEY.ACCESS_TOKEN, resJson.token);
-      sessionStorage.setItem(KEY.REFRESH_TOKEN, resJson.refresh_token);
+      sessionStorage.setItem(KEY.ACCESS_TOKEN, resJson.accessToken);
+      sessionStorage.setItem(KEY.REFRESH_TOKEN, resJson.refreshToken);
     }
     cb(resJson.error);
   } catch (error) {
@@ -61,11 +61,11 @@ const renewToken = async (cb = () => {}) => {
           'Content-Type': 'application/json',
           Authorization: accessToken,
         },
-        body: JSON.stringify({ refresh_token: refreshToken }),
+        body: JSON.stringify({ refreshToken }),
       });
       const resJson = await response.json();
       if (response.ok) {
-        sessionStorage.setItem(KEY.ACCESS_TOKEN, resJson.token);
+        sessionStorage.setItem(KEY.ACCESS_TOKEN, resJson.accessToken);
         cb(true);
       } else {
         cb(false);

@@ -1,4 +1,4 @@
-const validateUsername = (username) => {
+const validateNick = (username) => {
   if (username.length === 0) {
     return 'username can\'t be empty';
   }
@@ -69,7 +69,7 @@ const validateSame = (input1, input2) => {
 };
 
 export {
-  validateUsername,
+  validateNick,
   validateName,
   validateEmail,
   validatePassword,

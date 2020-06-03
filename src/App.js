@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
 
 // IMPORTING CONTEXTS
@@ -42,7 +43,7 @@ const AppRouter = () => {
           <Route path="/signin" component={SigninScreen} />
           <Route path="/join" component={JoinScreen} />
           <Route path="*">
-            <h1>404 NOT FOUND</h1>
+            <Redirect to="/" />
           </Route>
         </Switch>
       </AuthContext.Provider>

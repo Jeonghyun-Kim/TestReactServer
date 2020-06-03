@@ -9,7 +9,6 @@ import React from 'react';
 import { getMyInfo } from '../js/fetch_functions';
 
 // IMPORTING DEFINES
-import { ERROR_CODE } from '../js/defines';
 
 export default () => {
   // TODO: user default value with json
@@ -23,7 +22,7 @@ export default () => {
     getMyInfo((resJson) => {
       if (isSubscribed) {
         switch (resJson.error) {
-          case ERROR_CODE.OK:
+          case undefined:
             setUser(resJson.user);
             // setPaintings(resJson.paintings);
             setError(null);
@@ -51,7 +50,7 @@ export default () => {
                 <h2>loading...</h2>
               ) : (
                 <div>
-                  <h5>username: {user.username}</h5>
+                  <h5>nick: {user.nick}</h5>
                   <h5>name: {user.name}</h5>
                   <h5>email: {user.email}</h5>
                   <h5>gender: {user.gender}</h5>

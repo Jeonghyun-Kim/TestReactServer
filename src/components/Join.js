@@ -15,8 +15,9 @@ import AuthContext from '../AuthContext';
 // IMPORTING UTILS
 import { signUp } from '../js/auth_utils';
 import {
-  validateUsername,
-  validateName, validateEmail,
+  validateNick,
+  validateName,
+  validateEmail,
   validatePassword,
   validateSame,
 } from '../js/validation';
@@ -26,14 +27,14 @@ import { ERROR_CODE } from '../js/defines';
 
 // TODO: INPUT VALIDATION
 export default () => {
-  const [username, setUsername] = React.useState('');
+  const [nick, setUsername] = React.useState('');
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [password2, setPassword2] = React.useState('');
-  const [gender, setGender] = React.useState(null);
+  const [gender, setGender] = React.useState('secret');
   const [error, setError] = React.useState(null);
-  const [usernameError, setUsernameError] = React.useState(null);
+  const [nickError, setNickError] = React.useState(null);
   const [nameError, setNameError] = React.useState(null);
   const [emailError, setEmailError] = React.useState(null);
   const [passwordError, setPasswordError] = React.useState(null);
@@ -44,8 +45,9 @@ export default () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setError(null);
     signUp({
-      username, name, email, password, gender,
+      nick, name, email, password, gender,
     }, (err) => {
       switch (err) {
         case ERROR_CODE.USERNAME_ALREADY_OCCUPIED:
@@ -54,7 +56,7 @@ export default () => {
         case ERROR_CODE.EMAIL_ALREADY_OCCUPIED:
           setError('Your email already exists.');
           break;
-        case ERROR_CODE.OK:
+        case undefined:
           setSignedIn(true);
           history.goBack(1);
           break;
@@ -70,15 +72,15 @@ export default () => {
       <h2>Join Us Today!</h2>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="username"
+          label="nick"
           variant="outlined"
-          value={username}
+          value={nick}
           fullWidth
           margin="normal"
-          error={usernameError}
-          helperText={usernameError}
+          error={nickError}
+          helperText={nickError}
           onChange={(event) => {
-            setUsernameError(validateUsername(event.target.value.toLowerCase()));
+            setNickError(validateNick(event.target.value.toLowerCase()));
             setUsername(event.target.value.toLowerCase());
           }}
         />
@@ -138,8 +140,8 @@ export default () => {
         />
         <h3>성별</h3>
         <RadioGroup aria-label="gender" name="gender" value={gender} onChange={(event) => setGender(event.target.value)}>
-          <FormControlLabel value="Female" control={<Radio />} label="Female" />
-          <FormControlLabel value="Male" control={<Radio />} label="Male" />
+          <FormControlLabel value="female" control={<Radio />} label="Female" />
+          <FormControlLabel value="male" control={<Radio />} label="Male" />
         </RadioGroup>
         <Button variant="contained" color="primary" type="submit">Submit</Button>
       </form>

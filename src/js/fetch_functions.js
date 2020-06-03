@@ -30,7 +30,7 @@ const fetchServer = async (url, method, body, cb) => {
 };
 
 const getMyInfo = (cb) => {
-  fetchServer('/my', 'GET', null, cb);
+  fetchServer('/user', 'GET', null, cb);
 };
 
 const postPainting = async (formData, cb) => {
