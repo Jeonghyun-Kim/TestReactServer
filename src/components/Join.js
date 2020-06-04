@@ -33,19 +33,19 @@ export default () => {
   const [password, setPassword] = React.useState('');
   const [password2, setPassword2] = React.useState('');
   const [gender, setGender] = React.useState('secret');
-  const [error, setError] = React.useState(null);
-  const [nickError, setNickError] = React.useState(null);
-  const [nameError, setNameError] = React.useState(null);
-  const [emailError, setEmailError] = React.useState(null);
-  const [passwordError, setPasswordError] = React.useState(null);
-  const [password2Error, setPassword2Error] = React.useState(null);
+  const [error, setError] = React.useState('');
+  const [nickError, setNickError] = React.useState('');
+  const [nameError, setNameError] = React.useState('');
+  const [emailError, setEmailError] = React.useState('');
+  const [passwordError, setPasswordError] = React.useState('');
+  const [password2Error, setPassword2Error] = React.useState('');
 
   const { setSignedIn } = React.useContext(AuthContext);
   const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setError(null);
+    setError('');
     signUp({
       nick, name, email, password, gender,
     }, (err) => {
@@ -77,7 +77,7 @@ export default () => {
           value={nick}
           fullWidth
           margin="normal"
-          error={nickError}
+          error={Boolean(nickError)}
           helperText={nickError}
           onChange={(event) => {
             setNickError(validateNick(event.target.value.toLowerCase()));
@@ -90,7 +90,7 @@ export default () => {
           value={name}
           fullWidth
           margin="normal"
-          error={nameError}
+          error={Boolean(nameError)}
           helperText={nameError}
           onChange={(event) => {
             setNameError(validateName(event.target.value));
@@ -103,7 +103,7 @@ export default () => {
           value={email}
           fullWidth
           margin="normal"
-          error={emailError}
+          error={Boolean(emailError)}
           helperText={emailError}
           onChange={(event) => {
             setEmailError(validateEmail(event.target.value.toLowerCase()));
@@ -117,7 +117,7 @@ export default () => {
           value={password}
           fullWidth
           margin="normal"
-          error={passwordError}
+          error={Boolean(passwordError)}
           helperText={passwordError}
           onChange={(event) => {
             setPasswordError(validatePassword(event.target.value));
@@ -131,7 +131,7 @@ export default () => {
           value={password2}
           fullWidth
           margin="normal"
-          error={password2Error}
+          error={Boolean(password2Error)}
           helperText={password2Error}
           onChange={(event) => {
             setPassword2Error(validateSame(password, event.target.value));

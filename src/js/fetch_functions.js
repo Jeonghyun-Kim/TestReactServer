@@ -8,7 +8,7 @@ const fetchServer = async (url, method, body, cb) => {
       method,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
         body,
       },
     });

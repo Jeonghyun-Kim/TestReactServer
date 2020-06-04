@@ -1,4 +1,4 @@
-const SERVER_URL = '';
+const SERVER_URL = 'http://api.airygall.com:8081';
 const S3_URL = 's3.ap-northeast-2.amazonaws.com';
 const STORAGE_URL = {
   PAINTING: 'https://d29ybku8yqgqrh.cloudfront.net',
